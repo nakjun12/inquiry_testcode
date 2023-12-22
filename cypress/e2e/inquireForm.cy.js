@@ -1,3 +1,26 @@
+const submitInquiry = (category, subcategory) => {
+  // 카테고리 선택
+  if (category) {
+    cy.selectAndVerifyDropdownOption(
+      '[data-testid="category-dropdown"]',
+      category
+    );
+  }
+
+  if (subcategory) {
+    cy.selectAndVerifyDropdownOption(
+      '[data-testid="subcategory-dropdown"]',
+      subcategory
+    );
+  }
+
+  // 입력 필드에 텍스트 입력 및 폼 제출
+  cy.typeAndVerifyInput('[data-testid="title-input"]', "테스트 중입니다.");
+  cy.typeAndVerifyInput('[data-testid="content-input"]', "양해 바랍니다");
+  cy.get('[data-testid="submit-button"]').click();
+  cy.verifyModalContentAndConfirm("1:1문의를 등록하였습니다.");
+};
+
 describe("탭 전환 기능 테스트", () => {
   beforeEach(() => {
     cy.visit("/");
@@ -36,12 +59,6 @@ describe("탭 전환 기능 테스트", () => {
     );
 
     // 다시 문의하기 탭으로 전환 및 검증
-    cy.get('[data-testid="inquiry-tab"]').click();
-    cy.verifyTabAndContent(
-      '[data-testid="inquiry-tab"]',
-      '[data-testid="inquiry-form-panel"]',
-      true
-    );
   });
 });
 
@@ -94,24 +111,7 @@ describe("inquireForm 테스트", () => {
   });
 
   it("문의 조건을 충족하여 등록하는 경우 검증", () => {
-    // 카테고리 선택
-    cy.selectAndVerifyDropdownOption(
-      '[data-testid="category-dropdown"]',
-      "카셰어링"
-    );
-
-    cy.selectAndVerifyDropdownOption(
-      '[data-testid="subcategory-dropdown"]',
-      "예약문의"
-    );
-
-    cy.typeAndVerifyInput('[data-testid="title-input"]', "테스트 중입니다.");
-    cy.typeAndVerifyInput('[data-testid="content-input"]', "양해 바랍니다");
-
-    // 폼 제출
-    cy.get('[data-testid="submit-button"]').click();
-
-    cy.verifyModalContentAndConfirm("1:1문의를 등록하였습니다.");
+    submitInquiry("카셰어링", "예약문의");
 
     // 내 문의내역 탭의 aria-selected 속성이 true로 설정되었는지 확인
     cy.get('[data-testid="my-inquiry-tab"]').should(
@@ -119,5 +119,47 @@ describe("inquireForm 테스트", () => {
       "aria-selected",
       "true"
     );
+  });
+
+  it("카테고리가 기타일 경우 검증", () => {
+    submitInquiry("기타");
+
+    // 내 문의내역 탭의 aria-selected 속성이 true로 설정되었는지 확인
+    cy.get('[data-testid="my-inquiry-tab"]').should(
+      "have.attr",
+      "aria-selected",
+      "true"
+    );
+  });
+
+  it("문의 등록 2개 이상일 경우 검증", () => {
+    const repeatCount = 4; // 반복 횟수 설정
+
+    for (let i = 0; i < repeatCount; i++) {
+      if (i % 2 === 0) {
+        // 짝수 번째 반복에서는 "기타" 카테고리 선택
+        submitInquiry("기타");
+      } else {
+        // 홀수 번째 반복에서는 "카셰어링" 카테고리 및 "예약문의" 서브카테고리 선택
+        submitInquiry("카셰어링", "예약문의");
+      }
+
+      // 내 문의내역 탭의 aria-selected 속성 검증
+      cy.get('[data-testid="my-inquiry-tab"]').should(
+        "have.attr",
+        "aria-selected",
+        "true"
+      );
+
+      // 다음 반복을 위해 문의하기 탭으로 전환
+      if (i < repeatCount - 1) {
+        cy.get('[data-testid="inquiry-tab"]').click();
+        cy.verifyTabAndContent(
+          '[data-testid="inquiry-tab"]',
+          '[data-testid="inquiry-form-panel"]',
+          true
+        );
+      }
+    }
   });
 });
