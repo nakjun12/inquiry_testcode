@@ -3,7 +3,7 @@ import { forwardRef } from "react";
 
 const TitleInput = forwardRef((props, ref) => {
   return (
-    <div className="mt-4">
+    <div className="mt-4 mx-2">
       <input
         ref={ref}
         className="w-full p-2 border rounded-lg"

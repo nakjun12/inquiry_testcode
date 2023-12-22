@@ -53,7 +53,7 @@ export default function InquiryForm({ onTabChange }) {
       {/* 내용 입력 필드 */}
       <ContentInput ref={contentRef} />
       {/* 제출 버튼 */}
-      <div className="flex justify-center">
+      <div className="flex justify-center p-2">
         <button
           onClick={() => handleSubmit(titleRef, contentRef)}
           data-testid="submit-button"

@@ -3,7 +3,7 @@ import { forwardRef } from "react";
 
 const ContentInput = forwardRef((props, ref) => {
   return (
-    <div className="mt-4">
+    <div className="mt-4 mx-2">
       <textarea
         ref={ref}
         {...props} // 추가적인 props 확장
