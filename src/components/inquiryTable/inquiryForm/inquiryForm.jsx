@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { InquiryMenu } from "../../../util/dummy";
+import { INQUIRY_MENU } from "../../../util/dummy";
 import useFormLogic from "../../../util/hooks/useFormLogic";
 import CategoryDropdown from "./categoryDropdown";
 import ContentInput from "./contentInput";
@@ -22,7 +22,7 @@ export default function InquiryForm({ onTabChange }) {
   };
 
   // 기타 이벤트 핸들러 필요에 따라 추가
-  const selectCategoryArr = InquiryMenu[category];
+  const selectCategoryArr = INQUIRY_MENU[category];
 
   return (
     <section data-testid="inquiry-form-panel">
@@ -35,7 +35,7 @@ export default function InquiryForm({ onTabChange }) {
 
       <div className="flex justify-between mt-4 mx-2">
         <CategoryDropdown
-          InquiryMenu={InquiryMenu}
+          InquiryMenu={INQUIRY_MENU}
           category={category}
           handleCategoryChange={handleCategoryChange}
         />
