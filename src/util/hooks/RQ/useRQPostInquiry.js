@@ -1,10 +1,4 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
-
-const postInquiry = async (inquiryData) => {
-  const { data } = await axios.post("/inquire", inquiryData);
-  return data;
-};
 
 export const useRQPostInquiry = () => {
   const queryClient = useQueryClient();
