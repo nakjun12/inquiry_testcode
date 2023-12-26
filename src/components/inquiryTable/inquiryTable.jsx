@@ -1,6 +1,6 @@
 import { useState } from "react";
-import InquiryForm from "./inquiryForm/inquiryForm";
-import InquiryList from "./inquiryList/inquiryList";
+import InquiryForm from "./inquiryForm";
+import InquiryList from "./inquiryList";
 import TabBar from "./tabBar";
 
 function InquiryTable() {
