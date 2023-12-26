@@ -14,7 +14,7 @@ function createNewInquiry(newInquiry) {
 function handleResponse(response, status = 200) {
   return response
     ? HttpResponse.json(response, { status })
-    : HttpResponse(null, { status });
+    : new HttpResponse(null, { status });
 }
 
 export const handlers = [
