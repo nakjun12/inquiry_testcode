@@ -1,28 +1,19 @@
-// useFormLogic.js
+// useInquiryFormViewModel.js
 import { useState } from "react";
 import useModalStore from "../../store/modalStore";
 import validateInquiry from "../inquiryValidator";
 import { useRQPostInquiry } from "./RQ/useRQPostInquiry";
 
-const useFormLogic = (onTabChange) => {
+const useInquiryFormViewModel = (onTabChange) => {
   const [category, setCategory] = useState("");
   const [subcategory, setSubcategory] = useState("");
   const openModal = useModalStore((state) => state.openModal);
   const { mutate: postInquiry } = useRQPostInquiry();
 
-  const handleSubmit = async (titleRef, contentRef) => {
-    const title = titleRef.current.value;
-    const content = contentRef.current.value;
+  const submitInquiry = async (inquiry) => {
+    if (!inquiry) return;
 
-    if (
-      !validateInquiry({ openModal, category, subcategory, title, content })
-    ) {
-      return;
-    }
-
-    const newInquiry = { category, subcategory, title, content };
-
-    postInquiry(newInquiry, {
+    postInquiry(inquiry, {
       onSuccess: () => {
         openModal("1:1문의를 등록하였습니다.", () => onTabChange(1));
       },
@@ -33,7 +24,24 @@ const useFormLogic = (onTabChange) => {
     });
   };
 
+  const handleSubmit = async (titleRef, contentRef) => {
+    const title = titleRef.current.value;
+    const content = contentRef.current.value;
+    const isValid = validateInquiry({
+      openModal,
+      category,
+      subcategory,
+      title,
+      content
+    });
+    if (!isValid) {
+      return;
+    }
+
+    const newInquiry = { category, subcategory, title, content };
+    await submitInquiry(newInquiry);
+  };
   return { category, setCategory, subcategory, setSubcategory, handleSubmit };
 };
 
-export default useFormLogic;
+export default useInquiryFormViewModel;
