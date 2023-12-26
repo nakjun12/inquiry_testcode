@@ -1,13 +1,14 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
+import { INQUIRY_KEY } from "./queryKey";
 
 export const useRQInquiries = () => {
   const [selectedInquiryId, setSelectedInquiryId] = useState(null);
   const queryClient = useQueryClient();
 
   const { data: inquiries, ...queryInfo } = useQuery({
-    queryKey: ["inquiries"],
+    queryKey: [INQUIRY_KEY],
     queryFn: getInquiries
   });
 
