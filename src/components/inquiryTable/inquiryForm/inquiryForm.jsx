@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { INQUIRY_MENU } from "../../../util/dummy";
-import useFormLogic from "../../../util/hooks/useFormLogic";
+import useInquiryFormViewModel from "../../../util/hooks/useInquiryFormViewModel";
 import CategoryDropdown from "./categoryDropdown";
 import ContentInput from "./contentInput";
 import SubCategoryDropdown from "./subCategoryDropdown";
@@ -8,7 +8,7 @@ import TitleInput from "./titleInput";
 
 export default function InquiryForm({ onTabChange }) {
   const { category, setCategory, subcategory, setSubcategory, handleSubmit } =
-    useFormLogic(onTabChange);
+    useInquiryFormViewModel(onTabChange);
 
   const titleRef = useRef(null);
   const contentRef = useRef(null);

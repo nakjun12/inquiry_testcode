@@ -1,7 +1,7 @@
 import { useState } from "react";
-import InquiryForm from "./inquiryForm";
-import InquiryList from "./inquiryList";
-import TabBar from "./tabBar";
+import { InquiryForm } from "./inquiryForm";
+import { InquiryList } from "./inquiryList";
+import { TabBar } from "./tabBar";
 
 function InquiryTable() {
   const [tabIndex, setTabIndex] = useState(0);
