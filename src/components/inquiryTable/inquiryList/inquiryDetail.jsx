@@ -1,20 +1,13 @@
+import { formatLongWeekday } from "../../../util/dateUtils";
+
 const InquiryDetail = ({ inquiry, onBack, onDelete }) => {
   // 날짜 포맷팅
-  const formattedDate = new Date(inquiry.timestamp).toLocaleDateString(
-    "ko-KR",
-    {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      weekday: "long"
-    }
-  );
-
+  const formattedLongDate = formatLongWeekday(inquiry.timestamp);
   return (
     <div className="p-4">
       <h2 className="text-xl font-bold text-gray-800">{inquiry.title}</h2>
       <div className="mt-2">
-        <span className="text-sm text-gray-500">{formattedDate}</span>
+        <span className="text-sm text-gray-500">{formattedLongDate}</span>
         <span
           className={`ml-2 px-2 py-1 text-sm rounded-full ${
             !inquiry.isWaitingForResponse

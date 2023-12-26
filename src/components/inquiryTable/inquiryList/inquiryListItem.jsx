@@ -1,12 +1,9 @@
+import { formatShortWeekday } from "../../../util/dateUtils";
+
 const InquiryListItem = ({ inquiry, onSelect }) => {
   const { category, title, timestamp, isWaitingForResponse } = inquiry;
 
-  const formattedDate = new Date(timestamp).toLocaleDateString("ko-KR", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    weekday: "short" // 축약된 요일
-  });
+  const formattedShortDate = formatShortWeekday(timestamp);
 
   return (
     <button
@@ -22,7 +19,9 @@ const InquiryListItem = ({ inquiry, onSelect }) => {
             }>
             {!isWaitingForResponse ? "답변 대기" : "답변 완료"}
           </div>
-          <div className="ml-2  text-gray-400 text-sm">{formattedDate}</div>
+          <div className="ml-2  text-gray-400 text-sm">
+            {formattedShortDate}
+          </div>
         </div>
 
         <div className="flex items-center font-bold mt-2">
