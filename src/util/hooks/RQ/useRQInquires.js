@@ -1,10 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
-import { useState } from "react";
+import { deleteInquiry, getInquiries } from "../../../api/inquiry";
 import { INQUIRY_KEY } from "./queryKey";
 
 export const useRQInquiries = () => {
-  const [selectedInquiryId, setSelectedInquiryId] = useState(null);
   const queryClient = useQueryClient();
 
   const { data: inquiries, ...queryInfo } = useQuery({
@@ -12,33 +10,22 @@ export const useRQInquiries = () => {
     queryFn: getInquiries
   });
 
-  const deleteInquiry = useMutation({
-    mutationFn: async (id) => {
-      await axios.delete(`/inquire/${id}`);
-    },
+  const { mutate: mutateDeleteInquiry, ...mutationDeleteInfo } = useMutation({
+    mutationFn: deleteInquiry,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["inquiries"] });
+      // 성공 시 캐시 무효화 또는 다른 작업 수행
+      queryClient.invalidateQueries({ queryKey: [INQUIRY_KEY] });
+    },
+    onError: (error) => {
+      // 에러 처리
+      console.error("Error deleting inquiry:", error);
     }
   });
 
-  const handleDeleteInquiry = (id) => {
-    deleteInquiry.mutate(id, {
-      onSuccess: () => {
-        // 삭제 후 추가적으로 수행할 작업이 있다면 여기에 작성
-        setSelectedInquiryId(null);
-      },
-      onError: (error) => {
-        console.error("Error deleting inquiry:", error);
-        // 사용자에게 에러 메시지를 표시하는 로직 추가
-      }
-    });
-  };
-
   return {
     inquiries,
-    selectedInquiryId,
-    setSelectedInquiryId,
-    handleDeleteInquiry,
-    ...queryInfo
+    ...queryInfo,
+    mutateDeleteInquiry,
+    ...mutationDeleteInfo
   };
 };
