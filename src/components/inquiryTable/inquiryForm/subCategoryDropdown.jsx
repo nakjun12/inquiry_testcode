@@ -3,20 +3,16 @@ export default function SubCategoryDropdown({
   subcategory,
   handleSubCategoryChange
 }) {
+  const isDisabled =
+    !Array.isArray(selectCategoryArr) || selectCategoryArr.length === 0;
   return (
     <select
       className="p-2 border rounded-lg w-5/6 text-sm"
       value={subcategory}
       onChange={handleSubCategoryChange}
       data-testid="subcategory-dropdown"
-      style={
-        !Array.isArray(selectCategoryArr) || selectCategoryArr.length === 0
-          ? { backgroundColor: "lightgray" }
-          : {}
-      }
-      disabled={
-        !Array.isArray(selectCategoryArr) || selectCategoryArr.length === 0
-      }>
+      style={isDisabled ? { backgroundColor: "lightgray" } : {}}
+      disabled={isDisabled}>
       <option value="">
         {selectCategoryArr?.length === 0
           ? "선택할 항목이 없습니다"
