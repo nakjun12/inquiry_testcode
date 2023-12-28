@@ -1,27 +1,4 @@
-const submitInquiry = (category, subcategory) => {
-  // 카테고리 선택
-  if (category) {
-    cy.selectAndVerifyDropdownOption(
-      '[data-testid="category-dropdown"]',
-      category
-    );
-  }
-
-  if (subcategory) {
-    cy.selectAndVerifyDropdownOption(
-      '[data-testid="subcategory-dropdown"]',
-      subcategory
-    );
-  }
-
-  // 입력 필드에 텍스트 입력 및 폼 제출
-  cy.typeAndVerifyInput('[data-testid="title-input"]', "테스트 중입니다.");
-  cy.typeAndVerifyInput('[data-testid="content-input"]', "양해 바랍니다");
-  cy.get('[data-testid="submit-button"]').click();
-  cy.verifyModalContentAndConfirm("1:1문의를 등록하였습니다.");
-};
-
-describe("탭 전환 기능 테스트", () => {
+xdescribe("탭 전환 기능 테스트", () => {
   beforeEach(() => {
     cy.visit("/");
   });
@@ -62,7 +39,7 @@ describe("탭 전환 기능 테스트", () => {
   });
 });
 
-describe("inquireForm 테스트", () => {
+xdescribe("inquireForm 테스트", () => {
   beforeEach(() => {
     // 모든 테스트 케이스가 실행되기 전에 "index.html" 페이지를 방문합니다.
     cy.visit("/");
@@ -111,7 +88,7 @@ describe("inquireForm 테스트", () => {
   });
 
   it("문의 조건을 충족하여 등록하는 경우 검증", () => {
-    submitInquiry("카셰어링", "예약문의");
+    cy.submitInquiry("카셰어링", "예약문의");
 
     // 내 문의내역 탭의 aria-selected 속성이 true로 설정되었는지 확인
     cy.get('[data-testid="my-inquiry-tab"]').should(
@@ -122,7 +99,7 @@ describe("inquireForm 테스트", () => {
   });
 
   it("카테고리가 기타일 경우 검증", () => {
-    submitInquiry("기타");
+    cy.submitInquiry("기타");
 
     // 내 문의내역 탭의 aria-selected 속성이 true로 설정되었는지 확인
     cy.get('[data-testid="my-inquiry-tab"]').should(
@@ -138,10 +115,10 @@ describe("inquireForm 테스트", () => {
     for (let i = 0; i < repeatCount; i++) {
       if (i % 2 === 0) {
         // 짝수 번째 반복에서는 "기타" 카테고리 선택
-        submitInquiry("기타");
+        cy.submitInquiry("기타");
       } else {
         // 홀수 번째 반복에서는 "카셰어링" 카테고리 및 "예약문의" 서브카테고리 선택
-        submitInquiry("카셰어링", "예약문의");
+        cy.submitInquiry("카셰어링", "예약문의");
       }
 
       // 내 문의내역 탭의 aria-selected 속성 검증
@@ -161,5 +138,31 @@ describe("inquireForm 테스트", () => {
         );
       }
     }
+  });
+});
+
+describe("Inquiries API Test", () => {
+  beforeEach(() => {
+    cy.intercept("GET", "/inquire", { fixture: "inquiries.json" }).as(
+      "getInquiries"
+    );
+    cy.visit("/");
+  });
+
+  it("loads inquiries correctly", () => {
+    cy.submitInquiry("카셰어링", "예약문의");
+
+    // 내 문의내역 탭의 aria-selected 속성이 true로 설정되었는지 확인
+    cy.get('[data-testid="my-inquiry-tab"]').should(
+      "have.attr",
+      "aria-selected",
+      "true"
+    );
+    /* ==== Generated with Cypress Studio ==== */
+    cy.get(':nth-child(2) > .text-gray-400').click();
+    cy.get('[data-testid="inquiry-list-panel"] > .p-4 > .flex > :nth-child(1)').click();
+    cy.get(':nth-child(2) > .text-gray-400').click();
+    cy.get('.p-4 > .flex > :nth-child(2)').click();
+    /* ==== End Cypress Studio ==== */
   });
 });

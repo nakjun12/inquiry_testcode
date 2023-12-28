@@ -57,3 +57,26 @@ Cypress.Commands.add(
     }
   }
 );
+
+Cypress.Commands.add("submitInquiry", (category, subcategory) => {
+  // 카테고리 선택
+  if (category) {
+    cy.selectAndVerifyDropdownOption(
+      '[data-testid="category-dropdown"]',
+      category
+    );
+  }
+
+  if (subcategory) {
+    cy.selectAndVerifyDropdownOption(
+      '[data-testid="subcategory-dropdown"]',
+      subcategory
+    );
+  }
+
+  // 입력 필드에 텍스트 입력 및 폼 제출
+  cy.typeAndVerifyInput('[data-testid="title-input"]', "테스트 중입니다.");
+  cy.typeAndVerifyInput('[data-testid="content-input"]', "양해 바랍니다");
+  cy.get('[data-testid="submit-button"]').click();
+  cy.verifyModalContentAndConfirm("1:1문의를 등록하였습니다.");
+});
