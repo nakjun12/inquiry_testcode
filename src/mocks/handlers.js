@@ -4,7 +4,7 @@ import {
   deleteInquiry,
   getAllInquiries,
   getInquiryById
-} from "./inquireStore";
+} from "./inquiryStore";
 
 // 공통 응답 처리 함수
 function handleResponse(response, status = 200) {
