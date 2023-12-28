@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { InquiryForm } from "./inquiryForm";
-import { InquiryList } from "./inquiryList";
-import { TabBar } from "./tabBar";
+import { InquiryForm } from "./components/inquiryForm";
+import { InquiryList } from "./components/inquiryList";
+import { TabBar } from "./components/tabBar";
 
-function InquiryTable() {
+function InquiryPage() {
   const [tabIndex, setTabIndex] = useState(0);
 
   const handleTabChange = (index) => {
@@ -21,4 +21,4 @@ function InquiryTable() {
   );
 }
 
-export default InquiryTable;
+export default InquiryPage;

@@ -1,6 +1,5 @@
 // InquiryList.js
-
-import useInquiriesViewModel from "../../../util/hooks/useInquiriesViewModel";
+import useInquiriesViewModel from "@/util/hooks/useInquiriesViewModel";
 import InquiryListDisplay from "./InquiryListDisplay";
 import InquiryDetail from "./inquiryDetail";
 
