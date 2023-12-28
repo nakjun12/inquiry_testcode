@@ -1,10 +1,12 @@
 // useInquiriesViewModel.js
 import { useState } from "react";
-import { useRQInquiries } from "./RQ/useRQInquires";
+import { useDeleteInquiryMutation } from "./quries/inquiriesQueries/useDeleteInquiryMutation";
+import { useInquiriesQuery } from "./quries/inquiriesQueries/useInquiriesQuery";
 
 const useInquiriesViewModel = () => {
   const [selectedInquiryId, setSelectedInquiryId] = useState(null);
-  const { inquiries, mutateDeleteInquiry } = useRQInquiries();
+  const { mutateDeleteInquiry } = useDeleteInquiryMutation();
+  const { inquiries } = useInquiriesQuery();
 
   const handleDeleteInquiry = (id) => {
     mutateDeleteInquiry(id, {

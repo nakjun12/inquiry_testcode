@@ -1,14 +1,10 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { deleteInquiry, getInquiries } from "../../../api/inquiry";
-import { INQUIRY_KEY } from "./queryKey";
+// useDeleteInquiryMutation.js
+import { deleteInquiry } from "@/api/inquiry";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { INQUIRY_KEY } from "../queryKey";
 
-export const useRQInquiries = () => {
+export const useDeleteInquiryMutation = () => {
   const queryClient = useQueryClient();
-
-  const { data: inquiries, ...queryInfo } = useQuery({
-    queryKey: [INQUIRY_KEY],
-    queryFn: getInquiries
-  });
 
   const { mutate: mutateDeleteInquiry, ...mutationDeleteInfo } = useMutation({
     mutationFn: deleteInquiry,
@@ -23,8 +19,6 @@ export const useRQInquiries = () => {
   });
 
   return {
-    inquiries,
-    ...queryInfo,
     mutateDeleteInquiry,
     ...mutationDeleteInfo
   };
