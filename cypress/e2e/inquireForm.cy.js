@@ -84,7 +84,7 @@ describe("inquireForm 테스트", () => {
     // 폼 제출
     cy.get('[data-testid="submit-button"]').click();
 
-    cy.verifyModalContentAndConfirm("문의할 제목과 내용을 입력해주세요");
+    cy.verifyModalContentAndConfirm("문의할 제목을 입력해주세요");
   });
 
   it("문의 조건을 충족하여 등록하는 경우 검증", () => {
