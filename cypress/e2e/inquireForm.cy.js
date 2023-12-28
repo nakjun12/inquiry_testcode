@@ -1,4 +1,4 @@
-xdescribe("탭 전환 기능 테스트", () => {
+describe("탭 전환 기능 테스트", () => {
   beforeEach(() => {
     cy.visit("/");
   });
@@ -39,7 +39,7 @@ xdescribe("탭 전환 기능 테스트", () => {
   });
 });
 
-xdescribe("inquireForm 테스트", () => {
+describe("inquireForm 테스트", () => {
   beforeEach(() => {
     // 모든 테스트 케이스가 실행되기 전에 "index.html" 페이지를 방문합니다.
     cy.visit("/");
@@ -159,10 +159,12 @@ describe("Inquiries API Test", () => {
       "true"
     );
     /* ==== Generated with Cypress Studio ==== */
-    cy.get(':nth-child(2) > .text-gray-400').click();
-    cy.get('[data-testid="inquiry-list-panel"] > .p-4 > .flex > :nth-child(1)').click();
-    cy.get(':nth-child(2) > .text-gray-400').click();
-    cy.get('.p-4 > .flex > :nth-child(2)').click();
+    cy.get(":nth-child(2) > .text-gray-400").click();
+    cy.get(
+      '[data-testid="inquiry-list-panel"] > .p-4 > .flex > :nth-child(1)'
+    ).click();
+    cy.get(":nth-child(2) > .text-gray-400").click();
+    cy.get(".p-4 > .flex > :nth-child(2)").click();
     /* ==== End Cypress Studio ==== */
   });
 });

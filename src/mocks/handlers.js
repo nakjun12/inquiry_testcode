@@ -1,14 +1,10 @@
 import { http, HttpResponse } from "msw";
-
-const allInquire = new Map();
-let nextId = 1; // Unique ID for each post
-
-function createNewInquiry(newInquiry) {
-  const id = nextId++;
-  const timestamp = new Date().toISOString();
-  const isWaitingForResponse = false;
-  return { ...newInquiry, id, timestamp, isWaitingForResponse };
-}
+import {
+  addInquiry,
+  deleteInquiry,
+  getAllInquiries,
+  getInquiryById
+} from "./inquireStore";
 
 // 공통 응답 처리 함수
 function handleResponse(response, status = 200) {
@@ -17,24 +13,31 @@ function handleResponse(response, status = 200) {
     : new HttpResponse(null, { status });
 }
 
+// 각각의 핸들러 정의
+const getInquiriesHandler = http.get("/inquire", () =>
+  handleResponse(getAllInquiries())
+);
+
+const postInquiryHandler = http.post("/inquire", async ({ request }) => {
+  const newInquiry = await request.json();
+  const inquiry = addInquiry(newInquiry);
+  return handleResponse(inquiry, 201);
+});
+
+const getInquiryByIdHandler = http.get("/inquire/:id", ({ params }) => {
+  const inquiry = getInquiryById(Number(params.id));
+  return handleResponse(inquiry, inquiry ? 200 : 404);
+});
+
+const deleteInquiryHandler = http.delete("/inquire/:id", ({ params }) => {
+  const exists = deleteInquiry(Number(params.id));
+  return handleResponse(null, exists ? 204 : 404);
+});
+
+// 핸들러들을 배열로 내보냄
 export const handlers = [
-  http.get("/inquire", () => handleResponse(Array.from(allInquire.values()))),
-
-  http.post("/inquire", async ({ request }) => {
-    const newInquiry = await request.json();
-    const inquiry = createNewInquiry(newInquiry);
-    allInquire.set(inquiry.id, inquiry);
-    return handleResponse(inquiry, 201);
-  }),
-
-  // 특정 문의 조회
-  http.get("/inquire/:id", ({ params }) => {
-    const inquiry = allInquire.get(Number(params.id));
-    return handleResponse(inquiry, inquiry ? 200 : 404);
-  }),
-
-  http.delete("/inquire/:id", ({ params }) => {
-    const exists = allInquire.delete(Number(params.id));
-    return handleResponse(null, exists ? 204 : 404);
-  })
+  getInquiriesHandler,
+  postInquiryHandler,
+  getInquiryByIdHandler,
+  deleteInquiryHandler
 ];
