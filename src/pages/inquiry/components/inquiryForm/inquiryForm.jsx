@@ -1,17 +1,22 @@
 import { INQUIRY_MENU } from "@/util/dummy";
-import useInquiryFormViewModel from "@/util/hooks/useInquiryFormViewModel";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import useInquiryFormViewModel from "../../utils/hooks/useInquiryFormViewModel";
 import CategoryDropdown from "./categoryDropdown";
 import ContentInput from "./contentInput";
 import SubCategoryDropdown from "./subCategoryDropdown";
 import TitleInput from "./titleInput";
 
 export default function InquiryForm({ onTabChange }) {
-  const { category, setCategory, subcategory, setSubcategory, handleSubmit } =
-    useInquiryFormViewModel(onTabChange);
-
   const titleRef = useRef(null);
   const contentRef = useRef(null);
+  const [category, setCategory] = useState("");
+  const [subcategory, setSubcategory] = useState("");
+
+  const { handleSubmit } = useInquiryFormViewModel({
+    category,
+    subcategory,
+    onTabChange
+  });
 
   const handleCategoryChange = (event) => {
     setCategory(event.target.value);
