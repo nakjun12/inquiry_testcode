@@ -6,7 +6,7 @@
     "content": "양해 바랍니다",
     "id": 1,
     "timestamp": "2023-12-22T05:19:52.722Z",
-    "isWaitingForResponse": false
+    "isResponse": false
   },
   {
     "category": "카셰어링",
@@ -15,7 +15,7 @@
     "content": "양해 바랍니다",
     "id": 2,
     "timestamp": "2023-12-22T05:19:53.750Z",
-    "isWaitingForResponse": false
+    "isResponse": false
   },
   {
     "category": "기타",
@@ -24,7 +24,7 @@
     "content": "양해 바랍니다",
     "id": 3,
     "timestamp": "2023-12-22T05:19:54.776Z",
-    "isWaitingForResponse": false
+    "isResponse": false
   },
   {
     "category": "카셰어링",
@@ -33,7 +33,7 @@
     "content": "양해 바랍니다",
     "id": 4,
     "timestamp": "2023-12-22T05:19:56.202Z",
-    "isWaitingForResponse": false
+    "isResponse": false
   },
   {
     "category": "기타",
@@ -42,7 +42,7 @@
     "content": "양해 바랍니다",
     "id": 5,
     "timestamp": "2023-12-22T05:19:57.445Z",
-    "isWaitingForResponse": false
+    "isResponse": false
   },
   {
     "category": "카셰어링",
@@ -51,7 +51,7 @@
     "content": "양해 바랍니다",
     "id": 6,
     "timestamp": "2023-12-22T05:19:59.103Z",
-    "isWaitingForResponse": false
+    "isResponse": false
   },
   {
     "category": "기타",
@@ -60,7 +60,7 @@
     "content": "양해 바랍니다",
     "id": 7,
     "timestamp": "2023-12-22T05:20:00.563Z",
-    "isWaitingForResponse": false
+    "isResponse": false
   },
   {
     "category": "카셰어링",
@@ -69,6 +69,6 @@
     "content": "양해 바랍니다",
     "id": 8,
     "timestamp": "2023-12-22T05:20:02.340Z",
-    "isWaitingForResponse": false
+    "isResponse": false
   }
 ]
