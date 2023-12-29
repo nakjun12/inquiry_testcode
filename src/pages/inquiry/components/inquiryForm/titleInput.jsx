@@ -9,6 +9,11 @@ import { forwardRef } from "react";
  * @param {React.Ref} ref - React ref 객체, 입력 필드에 연결됩니다.
  */
 const TitleInput = forwardRef((props, ref) => {
+  // placeholder의 기본값 설정
+  const placeholder = props.placeholder || "제목을 입력해주세요(50자 내)";
+  // maxLength의 기본값 설정
+  const maxLength = props.maxLength || 50;
+
   return (
     <div className="mt-4 mx-2">
       {/* 제목 입력 필드 */}
@@ -16,8 +21,8 @@ const TitleInput = forwardRef((props, ref) => {
         ref={ref}
         {...props} // 추가적인 props를 확장하여 입력 필드에 적용
         className={`w-full p-2 border rounded-lg ${props.className}`} // 기본 스타일에 사용자 지정 className 추가
-        placeholder={props.placeholder || "제목을 입력해주세요(50자 내)"} // placeholder의 기본값 설정
-        maxLength={props.maxLength || 50} // 입력 최대 길이 설정
+        placeholder={placeholder}
+        maxLength={maxLength}
         data-testid="title-input" // 테스트를 위한 데이터 속성
       />
     </div>

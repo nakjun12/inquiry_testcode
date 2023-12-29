@@ -9,6 +9,10 @@ import { forwardRef } from "react";
  * @param {React.Ref} ref - React ref 객체, 텍스트 입력 필드에 연결됩니다.
  */
 const ContentInput = forwardRef((props, ref) => {
+  // 기본값 설정을 위한 변수
+  const placeholderText = props.placeholder || "내용을 입력해주세요";
+  const numberOfRows = props.rows || 8;
+
   return (
     <div className="mt-4 mx-2">
       {/* 텍스트 입력 필드 */}
@@ -16,8 +20,8 @@ const ContentInput = forwardRef((props, ref) => {
         ref={ref}
         {...props} // 추가적인 props를 확장하여 텍스트 입력 필드에 적용
         className={`w-full p-2 border rounded-lg ${props.className}`} // 기본 스타일에 사용자 지정 className 추가
-        placeholder={props.placeholder || "내용을 입력해주세요"} // placeholder의 기본값 설정
-        rows={props.rows || 8} // textarea의 행 수 기본값 설정
+        placeholder={placeholderText}
+        rows={numberOfRows}
         data-testid="content-input" // 테스트를 위한 데이터 속성
       />
     </div>

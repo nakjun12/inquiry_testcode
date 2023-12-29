@@ -16,6 +16,12 @@ export default function SubCategoryDropdown({
   const isDisabled =
     !Array.isArray(selectCategoryArr) || selectCategoryArr.length === 0;
 
+  // 선택 옵션의 텍스트 결정
+  const defaultOptionText =
+    selectCategoryArr?.length === 0
+      ? "선택할 항목이 없습니다"
+      : "문의할 항목을 선택해주세요";
+
   return (
     <select
       className="p-2 border rounded-lg w-5/6 text-sm"
@@ -25,11 +31,7 @@ export default function SubCategoryDropdown({
       style={isDisabled ? { backgroundColor: "lightgray" } : {}}
       disabled={isDisabled}>
       {/* 기본 옵션 */}
-      <option value="">
-        {selectCategoryArr?.length === 0
-          ? "선택할 항목이 없습니다"
-          : "문의할 항목을 선택해주세요"}
-      </option>
+      <option value="">{defaultOptionText}</option>
       {/* 서브 카테고리 옵션들을 동적으로 생성 */}
       {Array.isArray(selectCategoryArr) &&
         selectCategoryArr.map((el) => (
