@@ -5,20 +5,18 @@ const InquiryListItem = ({ inquiry, onSelect }) => {
 
   const formattedShortDate = formatShortWeekday(timestamp);
 
+  const badgeClass = isWaitingForResponse
+    ? "px-3 py-1 bg-green-200 text-green-800 rounded-full text-sm font-medium"
+    : "px-3 py-1 bg-red-200 text-red-800 rounded-full text-sm font-medium";
+  const buttonText = isWaitingForResponse ? "답변 완료" : "답변 대기";
+
   return (
     <button
       onClick={onSelect}
       className="flex justify-between items-center p-4 border-b w-full">
       <div>
         <div className="flex items-center">
-          <div
-            className={
-              !isWaitingForResponse
-                ? "px-3 py-1 bg-red-200 text-red-800 rounded-full text-sm font-medium"
-                : "px-3 py-1 bg-green-200 text-green-800 rounded-full text-sm font-medium"
-            }>
-            {!isWaitingForResponse ? "답변 대기" : "답변 완료"}
-          </div>
+          <span className={badgeClass}>{buttonText}</span>
           <div className="ml-2  text-gray-400 text-sm">
             {formattedShortDate}
           </div>
