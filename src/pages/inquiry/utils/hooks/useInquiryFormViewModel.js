@@ -3,20 +3,40 @@ import useModalStore from "@/store/modalStore";
 import { usePostInquiryMutation } from "@/util/hooks/quries/inquiriesQueries/usePostInquiryMutation";
 import validateThenModal from "@/util/validateThenModal";
 
+/**
+ * 문의 폼 관련 로직을 제공하는 훅입니다.
+ *
+ * @param {Object} params - 훅의 매개변수입니다.
+ * @param {string} params.category - 문의의 주 카테고리입니다.
+ * @param {string} params.subcategory - 문의의 하위 카테고리입니다.
+ * @param {Function} params.onTabChange - 탭 변경 처리 함수입니다.
+ * @returns {Object} 문의 폼 제출 핸들러 함수를 반환합니다.
+ */
+
 const useInquiryFormViewModel = ({ category, subcategory, onTabChange }) => {
+  // 모달 상태 관리를 위한 스토어 훅
   const openModal = useModalStore((state) => state.openModal);
+  // 문의 제출을 위한 뮤테이션 훅
   const { mutatePostInquiry: postInquiry } = usePostInquiryMutation();
 
+  /**
+   * 서버에 문의를 제출하는 함수입니다.
+   *
+   * @param {Object} inquiry - 제출할 문의 객체입니다.
+   */
   const submitInquiry = async (inquiry) => {
     if (!inquiry) return;
 
+    // 서버에 문의 제출 요청
     postInquiry(inquiry, {
       onSuccess: () => {
+        // 성공 시 모달을 열고 탭을 변경
         openModal("1:1문의를 등록하였습니다.", () => onTabChange(1));
       },
       onError: (error) => {
+        // 오류 발생 시 콘솔에 기록
         console.error("Failed to post inquiry:", error);
-        // 여기에 필요한 오류 처리 로직 추가
+        // 필요한 오류 처리 로직 추가
       }
     });
   };
@@ -57,10 +77,13 @@ const useInquiryFormViewModel = ({ category, subcategory, onTabChange }) => {
       return;
     }
 
+    // 유효한 문의 객체 생성
     const newInquiry = { category, subcategory, title, content };
+    // 문의 제출
     await submitInquiry(newInquiry);
   };
-  return { handleSubmit };
+
+  return { handleInquiryFormSubmit };
 };
 
 export default useInquiryFormViewModel;
