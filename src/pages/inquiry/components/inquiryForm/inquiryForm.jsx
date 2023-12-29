@@ -1,4 +1,4 @@
-import { INQUIRY_MENU } from "@/util/dummy";
+import { INQUIRY_MENU } from "@/utils/dummy";
 import { useRef, useState } from "react";
 import useInquiryFormViewModel from "../../utils/hooks/useInquiryFormViewModel";
 import CategoryDropdown from "./categoryDropdown";
