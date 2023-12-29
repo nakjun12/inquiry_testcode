@@ -21,9 +21,14 @@ const useInquiryFormViewModel = ({ category, subcategory, onTabChange }) => {
     });
   };
 
-  const handleSubmit = async (titleRef, contentRef) => {
-    const title = titleRef.current.value;
-    const content = contentRef.current.value;
+  /**
+   * 문의 폼 제출 이벤트 핸들러입니다. 유효성 검사 후 문의를 제출합니다.
+   *
+   * @param {React.RefObject} titleRef - 문의 제목을 입력하는 input 참조 객체입니다.
+   * @param {React.RefObject} contentRef - 문의 내용을 입력하는 textarea 참조 객체입니다.
+   */
+  const handleInquiryFormSubmit = async (title, content) => {
+    // 입력값에 대한 유효성 검사 수행
     const isValid = validateThenModal(
       [
         {
