@@ -1,17 +1,27 @@
 // InquiryList.js
 import useInquiriesViewModel from "@/utils/hooks/useInquiriesViewModel";
+import { useState } from "react";
 import InquiryListDisplay from "./InquiryListDisplay";
 import InquiryDetail from "./inquiryDetail";
 
 const InquiryList = () => {
-  const {
-    inquiries,
-    selectedInquiryId,
-    selectedInquiry,
-    handleDeleteInquiry,
-    handleInquirySelect,
+  const [selectedInquiryId, setSelectedInquiryId] = useState(null);
+
+  const handleBack = () => {
+    setSelectedInquiryId(null);
+  };
+
+  const { inquiries, handleDeleteInquiry } = useInquiriesViewModel({
     handleBack
-  } = useInquiriesViewModel();
+  });
+
+  const handleInquirySelect = (id) => {
+    setSelectedInquiryId(id);
+  };
+
+  const selectedInquiry = inquiries
+    ? inquiries.find((inquiry) => inquiry.id === selectedInquiryId)
+    : null;
 
   return (
     <div

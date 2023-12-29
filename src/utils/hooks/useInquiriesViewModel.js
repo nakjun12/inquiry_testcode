@@ -1,10 +1,8 @@
 // useInquiriesViewModel.js
-import { useState } from "react";
 import { useDeleteInquiryMutation } from "./quries/inquiriesQueries/useDeleteInquiryMutation";
 import { useInquiriesQuery } from "./quries/inquiriesQueries/useInquiriesQuery";
 
-const useInquiriesViewModel = () => {
-  const [selectedInquiryId, setSelectedInquiryId] = useState(null);
+const useInquiriesViewModel = ({ handleBack }) => {
   const { mutateDeleteInquiry } = useDeleteInquiryMutation();
   const { inquiries } = useInquiriesQuery();
 
@@ -12,7 +10,6 @@ const useInquiriesViewModel = () => {
     mutateDeleteInquiry(id, {
       onSuccess: () => {
         handleBack();
-        setSelectedInquiryId(null);
         // 성공 처리 로직
       },
       onError: (error) => {
@@ -22,25 +19,9 @@ const useInquiriesViewModel = () => {
     });
   };
 
-  const handleInquirySelect = (id) => {
-    setSelectedInquiryId(id);
-  };
-
-  const handleBack = () => {
-    setSelectedInquiryId(null);
-  };
-
-  const selectedInquiry = inquiries
-    ? inquiries.find((inquiry) => inquiry.id === selectedInquiryId)
-    : null;
-
   return {
     inquiries,
-    selectedInquiryId,
-    selectedInquiry,
-    handleDeleteInquiry,
-    handleInquirySelect,
-    handleBack
+    handleDeleteInquiry
   };
 };
 
