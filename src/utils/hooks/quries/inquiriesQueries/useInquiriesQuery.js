@@ -1,7 +1,7 @@
 // useInquiriesQuery.js
 import { getInquiries } from "@/api/inquiry";
+import { INQUIRY_KEY } from "@/utils/constants/queryKeys";
 import { useQuery } from "@tanstack/react-query";
-import { INQUIRY_KEY } from "../queryKey";
 
 export const useInquiriesQuery = () => {
   const { data: inquiries, ...inquiriesQueryInfo } = useQuery({

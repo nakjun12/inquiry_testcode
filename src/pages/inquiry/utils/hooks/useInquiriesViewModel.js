@@ -1,6 +1,6 @@
 // useInquiriesViewModel.js
-import { useDeleteInquiryMutation } from "./quries/inquiriesQueries/useDeleteInquiryMutation";
-import { useInquiriesQuery } from "./quries/inquiriesQueries/useInquiriesQuery";
+import { useDeleteInquiryMutation } from "@/utils/hooks/quries/inquiriesQueries/useDeleteInquiryMutation";
+import { useInquiriesQuery } from "@/utils/hooks/quries/inquiriesQueries/useInquiriesQuery";
 
 const useInquiriesViewModel = ({ handleBack }) => {
   const { mutateDeleteInquiry } = useDeleteInquiryMutation();
@@ -19,7 +19,7 @@ const useInquiriesViewModel = ({ handleBack }) => {
     });
   };
 
-  return {
+  return { 
     inquiries,
     handleDeleteInquiry
   };

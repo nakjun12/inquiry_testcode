@@ -1,4 +1,4 @@
-import { formatLongWeekday } from "@/utils/dateUtils";
+import { formatLongWeekday } from "@/utils/helpers/dateUtils";
 
 const InquiryDetail = ({ inquiry, onBack, onDelete }) => {
   // 날짜 포맷팅

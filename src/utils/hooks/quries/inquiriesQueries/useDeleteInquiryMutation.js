@@ -1,7 +1,7 @@
 // useDeleteInquiryMutation.js
 import { deleteInquiry } from "@/api/inquiry";
+import { INQUIRY_KEY } from "@/utils/constants/queryKeys";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { INQUIRY_KEY } from "../queryKey";
 
 export const useDeleteInquiryMutation = () => {
   const queryClient = useQueryClient();

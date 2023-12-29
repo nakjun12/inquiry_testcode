@@ -1,7 +1,7 @@
 // useInquiryFormViewModel.js
 import useModalStore from "@/store/modalStore";
+import validateThenModal from "@/utils/helpers/validateThenModal";
 import { usePostInquiryMutation } from "@/utils/hooks/quries/inquiriesQueries/usePostInquiryMutation";
-import validateThenModal from "@/utils/validateThenModal";
 
 /**
  * 문의 폼 관련 로직을 제공하는 훅입니다.

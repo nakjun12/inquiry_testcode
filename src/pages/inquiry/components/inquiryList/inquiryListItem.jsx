@@ -1,4 +1,4 @@
-import { formatShortWeekday } from "@/utils/dateUtils";
+import { formatShortWeekday } from "@/utils/helpers/dateUtils";
 
 const InquiryListItem = ({ inquiry, onSelect }) => {
   const { category, title, timestamp, isWaitingForResponse } = inquiry;
