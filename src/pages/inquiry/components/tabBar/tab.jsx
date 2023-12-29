@@ -1,5 +1,15 @@
-// Tab.js
+/**
+ * 탭 버튼을 표시하는 컴포넌트입니다.
+ *
+ * @param {Object} props - 컴포넌트의 props
+ *   @param {boolean} props.isSelected - 이 탭이 현재 선택된 상태인지 나타내는 부울 값
+ *   @param {string} props.id - 탭의 고유 식별자
+ *   @param {string} props.label - 탭에 표시될 레이블 문자열
+ *   @param {Function} props.onTabChange - 탭 변경 시 실행될 함수
+ */
 function Tab({ isSelected, id, label, onTabChange }) {
+  // 탭 버튼의 JSX 구조를 반환합니다.
+  // 현재 선택된 탭의 경우, opacity 클래스를 적용하지 않습니다.
   return (
     <button
       role="tab"
