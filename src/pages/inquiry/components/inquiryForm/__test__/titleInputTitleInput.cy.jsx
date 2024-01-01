@@ -1,4 +1,4 @@
-import TitleInput from "./titleInput";
+import TitleInput from "../titleInput";
 
 describe("<TitleInput />", () => {
   it("renders", () => {
