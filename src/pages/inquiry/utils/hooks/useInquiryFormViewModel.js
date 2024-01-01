@@ -32,7 +32,7 @@ const useInquiryFormViewModel = ({ category, subcategory, onTabChange }) => {
       onError: (error) => {
         // 오류 발생 시 콘솔에 기록
         console.error("Failed to post inquiry:", error);
-        // 필요한 오류 처리 로직 추가
+        openModal("네트워크 연결에 실패하였습니다.", () => {});
       }
     });
   };
