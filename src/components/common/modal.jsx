@@ -1,5 +1,5 @@
 // components/Modal.js
-import useModalStore from "../../store/modalStore";
+import useModalStore from "../../utils/hooks/store/useModalStore";
 
 const Modal = () => {
   const { isModalOpen, modalContent, confirm } = useModalStore();
