@@ -1,8 +1,10 @@
 import axios from "axios";
 
+const INQUIRE_ENDPOINT = "/inquire";
+
 export const getInquiries = async () => {
   try {
-    const { data } = await axios.get("/inquire");
+    const { data } = await axios.get(INQUIRE_ENDPOINT);
     console.log(data, "데이타!");
     return data;
   } catch (error) {
@@ -12,10 +14,10 @@ export const getInquiries = async () => {
 };
 
 export const postInquiry = async (inquiryData) => {
-  const { data } = await axios.post("/inquire", inquiryData);
+  const { data } = await axios.post(INQUIRE_ENDPOINT, inquiryData);
   return data;
 };
 
 export const deleteInquiry = async (id) => {
-  await axios.delete(`/inquire/${id}`);
+  await axios.delete(`${INQUIRE_ENDPOINT}/${id}`);
 };
