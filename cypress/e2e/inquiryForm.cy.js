@@ -52,11 +52,11 @@ describe.skip("inquireForm 테스트", () => {
 
   it("카테고리 및 세부 카테고리를 선택할 수 있는지 검증", () => {
     cy.selectAndVerifyDropdownOption(
-      '[data-testid="category-dropdown"]',
+      '[data-testid="questionCategory-dropdown"]',
       "카셰어링"
     );
     cy.selectAndVerifyDropdownOption(
-      '[data-testid="subcategory-dropdown"]',
+      '[data-testid="questionDetail-dropdown"]',
       "예약문의"
     );
   });
@@ -74,11 +74,11 @@ describe.skip("inquireForm 테스트", () => {
 
   it("폼 필드에 입력하지 않는 경우, 검증", () => {
     cy.selectAndVerifyDropdownOption(
-      '[data-testid="category-dropdown"]',
+      '[data-testid="questionCategory-dropdown"]',
       "카셰어링"
     );
     cy.selectAndVerifyDropdownOption(
-      '[data-testid="subcategory-dropdown"]',
+      '[data-testid="questionDetail-dropdown"]',
       "예약문의"
     );
     // 폼 제출
@@ -154,13 +154,13 @@ describe("Inquiries API Test", () => {
 
   //   cy.visit("/");
   //   const inquiryData = {
-  //     category: "기타",
-  //     subcategory: "",
+  //     questionCategory: "기타",
+  //     questionDetail: "",
   //     title: "테스트 중입니다.",
   //     content: "양해 바랍니다",
   //     id: 1,
-  //     timestamp: "2023-12-22T05:19:52.722Z",
-  //     isResponse: false
+  //     registeredDate: "2023-12-22T05:19:52.722Z",
+  //     answer: false
   //   };
 
   //   cy.request("POST", "/inquire", inquiryData).then((response) => {

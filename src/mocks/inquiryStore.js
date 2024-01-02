@@ -5,9 +5,9 @@ let nextId = 1; // Unique ID for each post
 // 새로운 Inquiry 생성
 export function createNewInquiry(newInquiry) {
   const id = nextId++;
-  const timestamp = new Date().toISOString();
-  const isResponse = false;
-  return { ...newInquiry, id, timestamp, isResponse };
+  const registeredDate = new Date().toISOString();
+  const answer = false;
+  return { ...newInquiry, id, registeredDate, answer };
 }
 
 // 모든 Inquiry 조회

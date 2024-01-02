@@ -58,19 +58,19 @@ Cypress.Commands.add(
   }
 );
 
-Cypress.Commands.add("submitInquiry", (category, subcategory) => {
+Cypress.Commands.add("submitInquiry", (questionCategory, questionDetail) => {
   // 카테고리 선택
-  if (category) {
+  if (questionCategory) {
     cy.selectAndVerifyDropdownOption(
-      '[data-testid="category-dropdown"]',
-      category
+      '[data-testid="questionCategory-dropdown"]',
+      questionCategory
     );
   }
 
-  if (subcategory) {
+  if (questionDetail) {
     cy.selectAndVerifyDropdownOption(
-      '[data-testid="subcategory-dropdown"]',
-      subcategory
+      '[data-testid="questionDetail-dropdown"]',
+      questionDetail
     );
   }
 
