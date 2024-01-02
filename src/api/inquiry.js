@@ -1,10 +1,10 @@
+import { BACK_URL } from "@/utils/constants/config";
 import axios from "axios";
-
-const INQUIRE_ENDPOINT = "/inquire";
+export const INQUIRY_ENDPOINT = `${BACK_URL}/inquiry`;
 
 export const getInquiries = async () => {
   try {
-    const { data } = await axios.get(INQUIRE_ENDPOINT);
+    const { data } = await axios.get(INQUIRY_ENDPOINT);
     console.log(data, "데이타!");
     return data;
   } catch (error) {
@@ -14,10 +14,10 @@ export const getInquiries = async () => {
 };
 
 export const postInquiry = async (inquiryData) => {
-  const { data } = await axios.post(INQUIRE_ENDPOINT, inquiryData);
+  const { data } = await axios.post(INQUIRY_ENDPOINT, inquiryData);
   return data;
 };
 
 export const deleteInquiry = async (id) => {
-  await axios.delete(`${INQUIRE_ENDPOINT}/${id}`);
+  await axios.delete(`${INQUIRY_ENDPOINT}/${id}`);
 };

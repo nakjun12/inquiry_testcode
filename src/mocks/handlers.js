@@ -1,3 +1,4 @@
+import { INQUIRY_ENDPOINT } from "@/api/inquiry";
 import { http, HttpResponse } from "msw";
 import {
   addInquiry,
@@ -5,7 +6,6 @@ import {
   getAllInquiries,
   getInquiryById
 } from "./inquiryStore";
-
 // 공통 응답 처리 함수
 function handleResponse(response, status = 200) {
   return response
@@ -14,25 +14,31 @@ function handleResponse(response, status = 200) {
 }
 
 // 각각의 핸들러 정의
-const getInquiriesHandler = http.get("/inquire", () =>
+const getInquiriesHandler = http.get(INQUIRY_ENDPOINT, () =>
   handleResponse(getAllInquiries())
 );
 
-const postInquiryHandler = http.post("/inquire", async ({ request }) => {
+const postInquiryHandler = http.post(INQUIRY_ENDPOINT, async ({ request }) => {
   const newInquiry = await request.json();
   const inquiry = addInquiry(newInquiry);
   return handleResponse(inquiry, 201);
 });
 
-const getInquiryByIdHandler = http.get("/inquire/:id", ({ params }) => {
-  const inquiry = getInquiryById(Number(params.id));
-  return handleResponse(inquiry, inquiry ? 200 : 404);
-});
+const getInquiryByIdHandler = http.get(
+  `${INQUIRY_ENDPOINT}/${id}`,
+  ({ params }) => {
+    const inquiry = getInquiryById(Number(params.id));
+    return handleResponse(inquiry, inquiry ? 200 : 404);
+  }
+);
 
-const deleteInquiryHandler = http.delete("/inquire/:id", ({ params }) => {
-  const exists = deleteInquiry(Number(params.id));
-  return handleResponse(null, exists ? 204 : 404);
-});
+const deleteInquiryHandler = http.delete(
+  `${INQUIRY_ENDPOINT}/${id}`,
+  ({ params }) => {
+    const exists = deleteInquiry(Number(params.id));
+    return handleResponse(null, exists ? 204 : 404);
+  }
+);
 
 // 핸들러들을 배열로 내보냄
 export const handlers = [
