@@ -1,7 +1,7 @@
 // InquiryList.js
 import { useState } from "react";
 import useInquiriesViewModel from "../../utils/hooks/useInquiriesViewModel";
-import InquiryListDisplay from "./InquiryListDisplay";
+import InquiryListDisplay from "./inquiryListDisplay";
 import InquiryDetail from "./inquiryDetail";
 
 /**
