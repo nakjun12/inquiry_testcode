@@ -1,11 +1,10 @@
-import { INQUIRY_MENU } from "@/utils/constants/dummy";
+import { QUESTION_INQUIRY_MENU } from "@/utils/constants/dummy";
 import { useRef, useState } from "react";
 import useInquiryFormViewModel from "../../utils/hooks/useInquiryFormViewModel";
-import CategoryDropdown from "./categoryDropdown";
 import ContentInput from "./contentInput";
-import SubCategoryDropdown from "./subCategoryDropdown";
+import QuestionCategoryDropdown from "./questionCategoryDropdown";
+import QuestionDetailDropdown from "./questionDetailDropdown";
 import TitleInput from "./titleInput";
-
 /**
  * 문의 폼을 표시하는 컴포넌트입니다.
  * 사용자는 이 폼을 통해 문의 사항을 제출할 수 있습니다.
@@ -19,24 +18,24 @@ export default function InquiryForm({ onTabChange }) {
   const contentRef = useRef(null);
 
   // 카테고리와 서브카테고리 상태 관리
-  const [category, setCategory] = useState("");
-  const [subcategory, setSubcategory] = useState("");
+  const [questionCategory, setQuestionCategory] = useState("");
+  const [questionDetail, setQuestionDetail] = useState("");
 
   // 문의 제출 핸들러
   const { handleInquiryFormSubmit } = useInquiryFormViewModel({
-    category,
-    subcategory,
+    questionCategory,
+    questionDetail,
     onTabChange
   });
 
   // 카테고리 변경 핸들러
-  const handleCategoryChange = (event) => {
-    setCategory(event.target.value);
+  const handleQuestionCategoryChange = (event) => {
+    setQuestionCategory(event.target.value);
   };
 
   // 서브카테고리 변경 핸들러
-  const handleSubCategoryChange = (event) => {
-    setSubcategory(event.target.value);
+  const handleQuestionDetailChange = (event) => {
+    setQuestionDetail(event.target.value);
   };
 
   // 제출 버튼 클릭 핸들러
@@ -47,7 +46,7 @@ export default function InquiryForm({ onTabChange }) {
   };
 
   // 선택된 카테고리에 따라 서브카테고리 목록 결정
-  const selectCategoryArr = INQUIRY_MENU[category];
+  const selectQuestionDetailArr = QUESTION_INQUIRY_MENU[questionCategory];
 
   return (
     <section data-testid="inquiry-form-panel">
@@ -59,17 +58,17 @@ export default function InquiryForm({ onTabChange }) {
 
       <div className="flex justify-between mt-4 mx-2">
         {/* 카테고리 드롭다운 */}
-        <CategoryDropdown
-          InquiryMenu={INQUIRY_MENU}
-          category={category}
-          handleCategoryChange={handleCategoryChange}
+        <QuestionCategoryDropdown
+          InquiryMenu={QUESTION_INQUIRY_MENU}
+          questionCategory={questionCategory}
+          handleQuestionCategoryChange={handleQuestionCategoryChange}
         />
 
         {/* 세부 카테고리 드롭다운 */}
-        <SubCategoryDropdown
-          subcategory={subcategory}
-          selectCategoryArr={selectCategoryArr}
-          handleSubCategoryChange={handleSubCategoryChange}
+        <QuestionDetailDropdown
+          questionDetail={questionDetail}
+          selectQuestionDetailArr={selectQuestionDetailArr}
+          handleQuestionDetailChange={handleQuestionDetailChange}
         />
       </div>
 

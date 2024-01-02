@@ -4,20 +4,20 @@
  *
  * @param {Object} props - 컴포넌트 속성
  * @param {Object} props.InquiryMenu - 카테고리 목록이 포함된 객체
- * @param {string} props.category - 현재 선택된 카테고리
- * @param {Function} props.handleCategoryChange - 카테고리 변경 시 호출될 핸들러 함수
+ * @param {string} props.questionCategory - 현재 선택된 카테고리
+ * @param {Function} props.handleQuestionCategoryChange - 카테고리 변경 시 호출될 핸들러 함수
  */
-export default function CategoryDropdown({
+export default function QuestionCategoryDropdown({
   InquiryMenu,
-  category,
-  handleCategoryChange
+  questionCategory,
+  handleQuestionCategoryChange
 }) {
   return (
     <select
       className="p-2 border rounded-lg mr-2 text-sm"
-      value={category}
-      onChange={handleCategoryChange}
-      data-testid="category-dropdown">
+      value={questionCategory}
+      onChange={handleQuestionCategoryChange}
+      data-testid="questionCategory-dropdown">
       {/* 기본 옵션 */}
       <option value="">서비스</option>
       {/* InquiryMenu 객체의 키를 사용하여 옵션 생성 */}
