@@ -1,11 +1,6 @@
 import { INQUIRY_ENDPOINT } from "@/api/inquiry";
 import { http, HttpResponse } from "msw";
-import {
-  addInquiry,
-  deleteInquiry,
-  getAllInquiries,
-  getInquiryById
-} from "./inquiryStore";
+import { addInquiry, deleteInquiry, getAllInquiries } from "./inquiryStore";
 // 공통 응답 처리 함수
 function handleResponse(response, status = 200) {
   return response
@@ -25,7 +20,7 @@ const postInquiryHandler = http.post(INQUIRY_ENDPOINT, async ({ request }) => {
 });
 
 const getInquiryByIdHandler = http.get(
-  `${INQUIRY_ENDPOINT}/${id}`,
+  `${INQUIRY_ENDPOINT}/:id`,
   ({ params }) => {
     const inquiry = getInquiryById(Number(params.id));
     return handleResponse(inquiry, inquiry ? 200 : 404);
@@ -33,7 +28,7 @@ const getInquiryByIdHandler = http.get(
 );
 
 const deleteInquiryHandler = http.delete(
-  `${INQUIRY_ENDPOINT}/${id}`,
+  `${INQUIRY_ENDPOINT}/:id`,
   ({ params }) => {
     const exists = deleteInquiry(Number(params.id));
     return handleResponse(null, exists ? 204 : 404);
