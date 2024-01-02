@@ -1,3 +1,5 @@
+import { FixedSizeList as List } from "react-window";
+import InquiryRow from "./inquiryRow";
 /**
  * 문의 목록을 표시하는 컴포넌트입니다. react-window의 FixedSizeList를 사용하여
  * 문의 목록을 효율적으로 렌더링합니다.

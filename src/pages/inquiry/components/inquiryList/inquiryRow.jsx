@@ -1,3 +1,4 @@
+import InquiryListItem from "./inquiryListItem";
 /**
  * 문의 목록 내 각 문의 항목을 렌더링하는 컴포넌트입니다.
  * `react-window`에서 제공하는 `FixedSizeList`에 의해 사용되며,
