@@ -1,4 +1,4 @@
-describe.skip("탭 전환 기능 테스트", () => {
+describe("탭 전환 기능 테스트", () => {
   beforeEach(() => {
     cy.visit("/");
   });
@@ -39,7 +39,7 @@ describe.skip("탭 전환 기능 테스트", () => {
   });
 });
 
-describe.skip("inquireForm 테스트", () => {
+describe("inquireForm 테스트", () => {
   beforeEach(() => {
     // 모든 테스트 케이스가 실행되기 전에 "index.html" 페이지를 방문합니다.
     cy.visit("/");
@@ -141,56 +141,7 @@ describe.skip("inquireForm 테스트", () => {
   });
 });
 
-describe("Inquiries API Test", () => {
-  beforeEach(() => {});
-  //기능테스트 해보자
-  //msw에서 작동 안하는거같음
-  it("loads inquiries correctly after submitting an inquiry", () => {
-    // 첫 페이지 로드
-    cy.fixture("inquiries").then((json) => {
-      console.log(json, "데이타");
-      cy.intercept("GET", "/inquiry", json).as("getInquiries");
-    });
-
-    cy.visit("/");
-    cy.get('[data-testid="my-inquiry-tab"]').click();
-    cy.verifyTabAndContent(
-      '[data-testid="my-inquiry-tab"]',
-      '[data-testid="inquiry-list-panel"]',
-      true
-    );
-
-    cy.get(
-      ".inquiry-row-3 > .justify-between > :nth-child(1) > :nth-child(1) > .ml-2"
-    ).click();
-    cy.get(
-      '[data-testid="inquiry-list-panel"] > .p-4 > .flex > :nth-child(1)'
-    ).click();
-    cy.get(
-      ".inquiry-row-4 > .justify-between > :nth-child(1) > :nth-child(1)"
-    ).click();
-
-    // DELETE 요청 인터셉트
-    cy.intercept("DELETE", "/inquiry/*", {
-      statusCode: 200, // 또는 적절한 성공 상태 코드
-      body: {
-        message: "Inquiry successfully deleted" // 필요에 따라 응답 본문 조정
-      }
-    }).as("deleteInquiry");
-    cy.get(".p-4 > .flex > :nth-child(2)").click();
-
-    // DELETE 요청이 완료되기를 기다림
-    cy.wait("@deleteInquiry");
-    /* ==== Generated with Cypress Studio ==== */
-    cy.get('[data-testid="modal-confirm-button"]').click();
-    /* ==== End Cypress Studio ==== */
-  });
-});
-
 //   MSW 작동 방식: MSW는 서비스 워커를 사용하여 HTTP 요청을 가로채고 모의 응답을 제공합니다. 이는 브라우저 수준에서 작동하며, 애플리케이션이 실제로 네트워크 요청을 보내기 전에 이 요청을 가로채고 처리합니다.
-
 // Cypress cy.intercept() 작동 방식: Cypress의 cy.intercept()는 Cypress 테스트 러너에서 네트워크 요청을 가로채고 조작합니다. 이는 브라우저 밖에서 작동하며, 브라우저가 네트워크 요청을 보낸 후 이 요청을 가로챕니다.
-
 // 상호 작용: MSW가 요청을 먼저 가로채고 처리하기 때문에, Cypress의 cy.intercept()는 MSW에 의해 이미 처리된 요청을 "보지" 못할 수 있습니다. 즉, MSW가 요청을 가로채고 모의 응답을 반환하면, Cypress는 원래의 요청을 가로채지 못할 수 있습니다.
-
 // 테스트 시 고려사항: MSW를 사용하는 경우, Cypress의 cy.intercept()를 사용하여 요청을 추가로 가로채거나 변경하는 것은 불필요하거나 혼란을 야기할 수 있습니다. 대신, MSW를 사용하여 모의 응답을 설정하고, Cypress는 이러한 응답에 기반한 애플리케이션의 동작을 검증하는 데 집중하는 것이 좋습니다.
