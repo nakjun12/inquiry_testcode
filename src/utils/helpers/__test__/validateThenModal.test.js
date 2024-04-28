@@ -52,13 +52,13 @@ describe("validateThenModal 함수 테스트", () => {
     expect(openModalMock).not.toHaveBeenCalled();
   });
 
-  test.only("빈 규칙 배열이나 유효하지 않은 규칙 배열을 적절히 처리한다", () => {
+  test("빈 규칙 배열이나 유효하지 않은 규칙 배열을 적절히 처리한다", () => {
     let result = validateThenModal([], openModalMock);
     expect(result).toBe(true);
     expect(openModalMock).not.toHaveBeenCalled();
 
     result = validateThenModal([{}], openModalMock);
     expect(result).toBe(false);
-    expect(openModalMock).not.toHaveBeenCalled();
+    expect(openModalMock).toHaveBeenCalled();
   });
 });
