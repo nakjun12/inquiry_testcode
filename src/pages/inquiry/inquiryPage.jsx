@@ -10,7 +10,7 @@ function InquiryPage() {
     setTabIndex(index);
   };
   return (
-    <div className="bg-[#f8f9fa] min-h-screen p-4 pt-0">
+    <div className="bg-[#f8f9fa] p-4 pt-0">
       <div className="bg-white shadow rounded-lg max-w-sm mx-auto">
         {/* 헤더 섹션 */}
         <TabBar tabIndex={tabIndex} onTabChange={handleTabChange} />
