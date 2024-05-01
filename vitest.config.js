@@ -6,7 +6,8 @@ export default mergeConfig(
   defineConfig({
     test: {
       globals: true,
-      environment: "jsdom"
+      environment: "jsdom",
+      exclude: ["**/playwright/**", "**/node_modules/**"]
     }
   })
 );
